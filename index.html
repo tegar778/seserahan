@@ -4,47 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     
-    <!-- ========== MENGGUNAKAN FILE ICON t_n.png ========== -->
-    <!-- Manifest PWA -->
+    <!-- ========== OPTIMASI PWA UNTUK HP ========== -->
+    <!-- Manifest PWA (Embedded) -->
     <link rel="manifest" href="data:application/manifest+json,{
       %22name%22:%22TEGAR%20AND%20NASTA%22,
       %22short_name%22:%22Seserahan%22,
+      %22description%22:%22Aplikasi%20perencana%20seserahan%20pernikahan%20Tegar%20%26%20Nasta%22,
       %22start_url%22:%22.%22,
       %22display%22:%22standalone%22,
+      %22orientation%22:%22portrait%22,
       %22theme_color%22:%22%23b87c54%22,
       %22background_color%22:%22%23fef9f0%22,
       %22icons%22:[
         {
           %22src%22:%22t_n.png%22,
-          %22sizes%22:%22192x192%22,
-          %22type%22:%22image/png%22,
-          %22purpose%22:%22any maskable%22
+          %22sizes%22:%2264x64%22,
+          %22type%22:%22image/png%22
         },
         {
           %22src%22:%22t_n.png%22,
-          %22sizes%22512x512%22,
+          %22sizes%22:%22128x128%22,
+          %22type%22:%22image/png%22
+        },
+        {
+          %22src%22:%22t_n.png%22,
+          %22sizes%22:%22144x144%22,
+          %22type%22:%22image/png%22,
+          %22purpose%22:%22any%22
+        },
+        {
+          %22src%22:%22t_n.png%22,
+          %22sizes%22:%22192x192%22,
+          %22type%22:%22image/png%22,
+          %22purpose%22:%22maskable%22
+        },
+        {
+          %22src%22:%22t_n.png%22,
+          %22sizes%22:%22512x512%22,
           %22type%22:%22image/png%22
         }
       ]
     }">
     
-    <!-- Icon untuk iOS (Apple) -->
+    <!-- Icon untuk iOS (Apple) - multiple sizes -->
     <link rel="apple-touch-icon" href="t_n.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="t_n.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="t_n.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="t_n.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="t_n.png">
     
-    <!-- Favicon untuk browser biasa -->
-    <link rel="icon" type="image/png" href="t_n.png">
+    <!-- Favicon untuk semua browser -->
+    <link rel="icon" type="image/png" sizes="64x64" href="t_n.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="t_n.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="t_n.png">
     <link rel="shortcut icon" href="t_n.png">
     
-    <!-- Meta untuk PWA -->
+    <!-- Meta untuk PWA Mobile -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Seserahan">
     <meta name="theme-color" content="#b87c54">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
     <!-- ================================================ -->
     
-    <title>List Seserahan Pernikahan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>List Seserahan - Tegar & Nasta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
@@ -55,210 +80,585 @@
             font-family: 'Inter', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
+
         body {
-            background: linear-gradient(145deg, #fef9f0 0%, #fff5eb 100%);
-            padding: 16px 12px;
+            background: linear-gradient(135deg, #fdf8f2 0%, #fef5e8 100%);
+            padding: 20px 16px;
             min-height: 100vh;
         }
+
+        /* Container utama dengan efek glassmorphism */
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: rgba(255,255,255,0.9);
-            border-radius: 32px;
-            padding: 18px 16px;
-            border: 1px solid #ffe6d5;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(2px);
+            border-radius: 40px;
+            padding: 24px 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(230, 188, 153, 0.3);
         }
+
+        /* Header dengan dekorasi */
+        .header-section {
+            text-align: center;
+            margin-bottom: 28px;
+            position: relative;
+        }
+        
+        .header-section::before {
+            content: "💍";
+            position: absolute;
+            left: 10px;
+            top: -10px;
+            font-size: 40px;
+            opacity: 0.3;
+        }
+        
+        .header-section::after {
+            content: "💍";
+            position: absolute;
+            right: 10px;
+            top: -10px;
+            font-size: 40px;
+            opacity: 0.3;
+        }
+        
         h1 {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #b47c5e, #c79a6e);
+            background: linear-gradient(135deg, #b47c5e, #d4a373);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            letter-spacing: -0.5px;
         }
+        
+        .subtitle {
+            color: #c28a5e;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        .couple-name {
+            font-size: 1.1rem;
+            color: #8b6346;
+            margin-top: 5px;
+            font-weight: 600;
+            background: #fef0e4;
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 50px;
+        }
+
+        /* Dashboard Cards dengan efek hover */
         .dashboard {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 12px;
-            margin: 20px 0;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+            margin: 25px 0;
         }
+        
         .card {
-            background: white;
-            border-radius: 20px;
-            padding: 12px;
+            background: linear-gradient(135deg, #ffffff 0%, #fffaf5 100%);
+            border-radius: 24px;
+            padding: 16px 12px;
             text-align: center;
-            border: 1px solid #f9e2ce;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #f5e2d0;
+            transition: all 0.3s ease;
         }
-        .card i { font-size: 24px; color: #c28a5e; }
-        .card-value { font-size: 20px; font-weight: 800; color: #5e3a2b; }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(184, 124, 84, 0.1);
+            border-color: #dbb48f;
+        }
+        
+        .card i {
+            font-size: 28px;
+            color: #c28a5e;
+            margin-bottom: 8px;
+        }
+        
+        .card-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #b8957a;
+        }
+        
+        .card-value {
+            font-size: 22px;
+            font-weight: 800;
+            color: #5e3a2b;
+            margin-top: 6px;
+        }
+
+        /* Filter Section Premium */
         .filter-section {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin: 15px 0;
+            gap: 12px;
+            margin: 20px 0;
+            background: #fffaf5;
+            padding: 16px 18px;
+            border-radius: 60px;
+            border: 1px solid #f5e2d0;
         }
-        .filter-group { flex: 1; min-width: 120px; }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 130px;
+        }
+        
+        .filter-group label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #c28a5e;
+            display: block;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+        
         select, input {
             width: 100%;
-            padding: 10px;
-            border-radius: 40px;
-            border: 1px solid #f5d5be;
-        }
-        button {
-            background: #ecc8ae;
-            border: none;
             padding: 10px 16px;
-            border-radius: 40px;
+            border-radius: 50px;
+            border: 1px solid #f0ddcd;
+            background: white;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s;
+        }
+        
+        select:focus, input:focus {
+            border-color: #dbb48f;
+            box-shadow: 0 0 0 3px rgba(219, 180, 143, 0.2);
+        }
+
+        /* Button Styles */
+        button {
+            background: #f0e0d0;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s ease;
+            color: #5e3a2b;
+            font-size: 13px;
             min-height: 44px;
         }
-        .btn-primary { background: #b87c54; color: white; }
-        .btn-danger { background: #f1cfc2; color: #ac5a3a; }
+        
+        button i {
+            margin-right: 6px;
+        }
+        
+        button:active {
+            transform: scale(0.97);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #b87c54, #c9946a);
+            color: white;
+            box-shadow: 0 2px 8px rgba(184, 124, 84, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #a56e48, #b87c54);
+        }
+        
+        .btn-danger {
+            background: #f5e0d4;
+            color: #c26a4a;
+        }
+        
+        .btn-danger:hover {
+            background: #f0d0c0;
+        }
+        
+        .btn-success {
+            background: #e0f0e0;
+            color: #3a7a4a;
+        }
+
+        /* Table Premium */
         .table-wrapper {
             overflow-x: auto;
-            margin: 15px 0;
+            margin: 20px 0;
+            border-radius: 24px;
+            background: white;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
         }
+        
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 700px;
+            min-width: 750px;
         }
-        th, td {
-            padding: 10px 8px;
+        
+        th {
+            background: linear-gradient(135deg, #fff5ec, #ffefe3);
+            padding: 14px 10px;
             text-align: left;
-            border-bottom: 1px solid #f9e6db;
+            font-weight: 700;
+            color: #694b34;
+            font-size: 12px;
+            border-bottom: 2px solid #f5e2d0;
         }
-        th { background: #fff3ea; }
+        
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #faf0e8;
+            vertical-align: middle;
+            font-size: 13px;
+        }
+        
         .row-purchased {
-            background-color: #eef5ea !important;
+            background-color: #f0f8ed !important;
             text-decoration: line-through;
+            color: #8ba87a;
         }
+        
+        .row-purchased td {
+            color: #8ba87a;
+        }
+        
+        .category-badge {
+            background: linear-gradient(135deg, #fff0e4, #ffe8d8);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+            color: #b87c54;
+        }
+
+        /* Action Buttons */
         .action-bar {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
             justify-content: space-between;
-            margin: 15px 0;
+            align-items: center;
+            margin: 20px 0;
         }
+        
         .right-buttons {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
         }
+
+        /* Modal Premium */
         .modal {
             display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
+        
         .modal-content {
             background: white;
             width: 90%;
             max-width: 500px;
-            padding: 20px;
-            border-radius: 32px;
+            padding: 28px 24px;
+            border-radius: 40px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            border-top: 8px solid #e6bc99;
+            animation: modalSlide 0.3s ease;
         }
+        
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-content h3 {
+            margin-bottom: 20px;
+            color: #694b34;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
+        
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 10px;
-            border-radius: 28px;
-            border: 1px solid #eedbcb;
+            padding: 12px 16px;
+            border-radius: 30px;
+            border: 1.5px solid #f0ddcd;
+            font-size: 14px;
+            transition: all 0.2s;
         }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #dbb48f;
+            outline: none;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        /* Toast Notification */
         .toast {
             position: fixed;
-            bottom: 20px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: #4a2e1f;
+            background: linear-gradient(135deg, #4a2e1f, #5e3a2b);
             color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-size: 13px;
+            font-weight: 500;
             z-index: 2000;
+            animation: toastSlide 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
         }
+        
+        @keyframes toastSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* Install Prompt */
         .install-prompt {
-            background: #e8d9cc;
-            border-radius: 20px;
-            padding: 10px 16px;
-            margin-bottom: 16px;
+            background: linear-gradient(135deg, #f5e8dc, #f0dfcf);
+            border-radius: 60px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
             display: none;
             align-items: center;
             justify-content: space-between;
+            font-size: 13px;
+            font-weight: 500;
+            color: #5e3a2b;
+            border: 1px solid #e6bc99;
         }
-        @media (max-width: 600px) {
-            .dashboard { grid-template-columns: repeat(2, 1fr); }
-            .right-buttons { width: 100%; justify-content: center; }
-            .action-bar { flex-direction: column; }
+        
+        .install-prompt button {
+            background: #b87c54;
+            color: white;
+            padding: 8px 20px;
+            font-size: 12px;
+        }
+
+        /* Checkbox Style */
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #b87c54;
+            margin-right: 5px;
+            transform: translateY(2px);
+        }
+
+        /* Action Icons */
+        .action-icons i {
+            font-size: 18px;
+            margin: 0 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 6px;
+            border-radius: 50%;
+        }
+        
+        .action-icons i:hover {
+            background: #f5e8dc;
+        }
+        
+        .fa-edit { color: #c28a5e; }
+        .fa-trash-alt { color: #cd8d6e; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            font-size: 10px;
+            margin-top: 20px;
+            color: #d4bca5;
+            padding-top: 15px;
+            border-top: 1px solid #f5e2d0;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            body {
+                padding: 12px 10px;
+            }
+            .container {
+                padding: 18px 14px;
+            }
+            h1 {
+                font-size: 1.4rem;
+            }
+            .couple-name {
+                font-size: 0.9rem;
+            }
+            .dashboard {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .card-value {
+                font-size: 18px;
+            }
+            .filter-section {
+                flex-direction: column;
+                border-radius: 28px;
+            }
+            .action-bar {
+                flex-direction: column;
+            }
+            .right-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+            .toast {
+                white-space: normal;
+                text-align: center;
+                max-width: 85%;
+                font-size: 12px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .dashboard {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+        
+        /* Scrollbar cantik */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f5e8dc;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #dbb48f;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
+
 <div class="container">
-    <h1><i class="fas fa-ring"></i> List Seserahan Pernikahan <br> Tegar Fikri Maulana & Nasta Agnia Zahira</h1>
-    <div style="margin-bottom: 15px; color: #a77b55;">Rencanakan seserahan spesial</div>
-    
-    <!-- Install Prompt untuk Mobile -->
-    <div id="installPrompt" class="install-prompt" style="display: none;">
-        <span><i class="fas fa-download"></i> Install ke Home Screen</span>
-        <button id="installBtn" style="background:#b87c54; color:white;">Install</button>
+    <div class="header-section">
+        <h1><i class="fas fa-ring" style="color: #dbb48f; margin-right: 8px;"></i> List Seserahan</h1>
+        <div class="couple-name">💖 Tegar Fikri Maulana & Nasta Agnia Zahira 💖</div>
+        <div class="subtitle">Rencanakan hari bahagia dengan cinta</div>
     </div>
     
+    <!-- Install Prompt untuk Mobile -->
+    <div id="installPrompt" class="install-prompt">
+        <span><i class="fas fa-download"></i> Install aplikasi ke Home Screen</span>
+        <button id="installBtn"><i class="fas fa-plus"></i> Install</button>
+    </div>
+    
+    <!-- Dashboard Cards -->
     <div class="dashboard">
         <div class="card"><i class="fas fa-coins"></i><div class="card-label">Total Biaya</div><div class="card-value" id="totalCost">Rp0</div></div>
         <div class="card"><i class="fas fa-shopping-cart"></i><div class="card-label">Sudah Dibeli</div><div class="card-value" id="purchasedCost">Rp0</div></div>
         <div class="card"><i class="fas fa-hourglass-half"></i><div class="card-label">Belum Dibeli</div><div class="card-value" id="unpurchasedCost">Rp0</div></div>
         <div class="card"><i class="fas fa-boxes"></i><div class="card-label">Total Item</div><div class="card-value" id="totalItems">0</div></div>
+        <div class="card"><i class="fas fa-check-circle"></i><div class="card-label">Item Dibeli</div><div class="card-value" id="purchasedItems">0</div></div>
     </div>
     
+    <!-- Filter & Search -->
     <div class="filter-section">
-        <div class="filter-group"><select id="filterCategory"><option value="all">Semua Kategori</option></select></div>
-        <div class="filter-group"><input type="text" id="searchInput" placeholder="Cari nama/brand..."></div>
-        <div class="filter-group"><button id="resetFilterBtn">Reset</button></div>
-    </div>
-    
-    <div class="action-bar">
-        <button id="addItemBtn" class="btn-primary"><i class="fas fa-plus"></i> Tambah Seserahan</button>
-        <div class="right-buttons">
-            <button id="exportJsonBtn"><i class="fas fa-download"></i> JSON</button>
-            <button id="importJsonBtn"><i class="fas fa-upload"></i> Import</button>
-            <button id="exportCsvBtn"><i class="fas fa-file-excel"></i> CSV</button>
-            <button id="resetDataBtn" class="btn-danger"><i class="fas fa-trash"></i> Reset</button>
+        <div class="filter-group">
+            <label><i class="fas fa-tag"></i> Kategori</label>
+            <select id="filterCategory"><option value="all">Semua Kategori</option></select>
+        </div>
+        <div class="filter-group">
+            <label><i class="fas fa-search"></i> Cari</label>
+            <input type="text" id="searchInput" placeholder="Nama atau brand...">
+        </div>
+        <div class="filter-group">
+            <label>&nbsp;</label>
+            <button id="resetFilterBtn"><i class="fas fa-eraser"></i> Reset Filter</button>
         </div>
     </div>
     
+    <!-- Action Buttons -->
+    <div class="action-bar">
+        <button id="addItemBtn" class="btn-primary"><i class="fas fa-plus-circle"></i> Tambah Seserahan</button>
+        <div class="right-buttons">
+            <button id="exportJsonBtn"><i class="fas fa-download"></i> JSON</button>
+            <button id="importJsonBtn"><i class="fas fa-upload"></i> Import</button>
+            <button id="exportCsvBtn" class="btn-success"><i class="fas fa-file-excel"></i> CSV</button>
+            <button id="resetDataBtn" class="btn-danger"><i class="fas fa-trash-alt"></i> Reset</button>
+        </div>
+    </div>
+    
+    <!-- Table Data -->
     <div class="table-wrapper">
         <table>
-            <thead><tr><th>No</th><th>Nama</th><th>Detail</th><th>Brand</th><th>Kategori</th><th>Qty</th><th>Harga</th><th>Total</th><th>Status</th><th>Aksi</th></tr></thead>
+            <thead>
+                <tr><th>No</th><th>Nama Seserahan</th><th>Detail</th><th>Brand</th><th>Kategori</th><th>Qty</th><th>Harga</th><th>Total</th><th>Status</th><th>Aksi</th></tr>
+            </thead>
             <tbody id="tableBody"></tbody>
         </table>
     </div>
-    <footer style="text-align:center; font-size:11px; margin-top:15px;">💾 Data tersimpan otomatis di HP ini | <i class="fas fa-image"></i> Icon: t_n.png</footer>
+    
+    <footer>
+        💾 Data tersimpan otomatis di HP ini | <i class="fas fa-mobile-alt"></i> Bisa offline | <i class="fas fa-heart" style="color:#e6bc99;"></i> Untuk Tegar & Nasta
+    </footer>
 </div>
 
+<!-- Modal Form -->
 <div id="itemModal" class="modal">
     <div class="modal-content">
-        <h3 id="modalTitle">Tambah Seserahan</h3>
+        <h3 id="modalTitle"><i class="fas fa-gift"></i> Tambah Seserahan</h3>
         <form id="itemForm">
-            <div class="form-group"><input type="text" id="nama" placeholder="Nama Seserahan" required></div>
+            <div class="form-group"><input type="text" id="nama" placeholder="Nama Seserahan *" required autocomplete="off"></div>
             <div class="form-group"><textarea id="detail" placeholder="Detail / Deskripsi" rows="2"></textarea></div>
-            <div class="form-group"><input type="text" id="brand" placeholder="Brand / Merk"></div>
-            <div class="form-group"><select id="kategori">
-                <option>Fashion</option><option>Makeup</option><option>Skincare</option>
-                <option>Elektronik</option><option>Perhiasan</option>
-                <option>Perlengkapan Ibadah</option><option>Lainnya</option>
-            </select></div>
-            <div class="form-group"><input type="number" id="qty" value="1" min="1"></div>
-            <div class="form-group"><input type="number" id="hargaSatuan" value="0" min="0"></div>
+            <div class="form-group"><input type="text" id="brand" placeholder="Brand / Merk" autocomplete="off"></div>
+            <div class="form-group">
+                <select id="kategori" required>
+                    <option>Fashion</option><option>Makeup</option><option>Skincare</option>
+                    <option>Elektronik</option><option>Perhiasan</option>
+                    <option>Perlengkapan Ibadah</option><option>Lainnya</option>
+                </select>
+            </div>
+            <div class="form-group"><input type="number" id="qty" value="1" min="1" required></div>
+            <div class="form-group"><input type="number" id="hargaSatuan" value="0" min="0" required></div>
             <div class="form-group"><label><input type="checkbox" id="statusCheckbox"> Sudah Dibeli</label></div>
-            <div class="modal-actions" style="display:flex; gap:10px; justify-content:flex-end;">
-                <button type="button" id="modalCancelBtn">Batal</button>
+            <div class="modal-actions">
+                <button type="button" id="modalCancelBtn" class="btn-danger">Batal</button>
                 <button type="submit" class="btn-primary">Simpan</button>
             </div>
         </form>
@@ -270,7 +670,7 @@
     let deferredPrompt = null;
     const kategoriOptions = ["Fashion","Makeup","Skincare","Elektronik","Perhiasan","Perlengkapan Ibadah","Lainnya"];
     
-    // PWA Install
+    // PWA Install Event
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
@@ -296,9 +696,9 @@
             nextId = items.length ? Math.max(...items.map(i=>i.id)) + 1 : 1; 
         } else { 
             items = [
-                {id:1, nama:"Masker Pernikahan", detail:"Sheet mask glow", brand:"LuxSkin", kategori:"Skincare", qty:5, hargaSatuan:25000, status:false},
+                {id:1, nama:"Masker Pernikahan", detail:"Sheet mask glow spesial", brand:"LuxSkin", kategori:"Skincare", qty:5, hargaSatuan:25000, status:false},
                 {id:2, nama:"Gelang Emas", detail:"Emas 17K 3 gram", brand:"UBS", kategori:"Perhiasan", qty:1, hargaSatuan:3200000, status:true},
-                {id:3, nama:"Parfume Couple", detail:"Set isi 2", brand:"Zara", kategori:"Fashion", qty:2, hargaSatuan:450000, status:false}
+                {id:3, nama:"Parfume Couple", detail:"Set isi 2 untuk mempelai", brand:"Zara", kategori:"Fashion", qty:2, hargaSatuan:450000, status:false}
             ]; 
             nextId = 4; 
         }
@@ -324,7 +724,7 @@
         const tbody = document.getElementById("tableBody");
         tbody.innerHTML = "";
         if(filtered.length === 0) {
-            tbody.innerHTML = "<tr><td colspan='10' style='text-align:center; padding:30px;'>✨ Belum ada data. Tambah seserahan yuk!</td></tr>";
+            tbody.innerHTML = "<tr><td colspan='10' style='text-align:center; padding:40px;'>✨ Belum ada data. Yuk tambah seserahan! ✨</td></tr>";
             return;
         }
         filtered.forEach((item, idx) => {
@@ -332,15 +732,15 @@
             const row = `<tr class="${item.status ? 'row-purchased' : ''}">
                 <td>${idx+1}</td>
                 <td><strong>${escapeHtml(item.nama)}</strong></td>
-                <td>${escapeHtml(item.detail || '-')}</td>
+                <td>${escapeHtml(item.detail?.substring(0, 40) || '-')}</td>
                 <td>${escapeHtml(item.brand || '-')}</td>
-                <td><span style="background:#fff0e4; padding:4px 8px; border-radius:20px;">${item.kategori}</span></td>
+                <td><span class="category-badge">${escapeHtml(item.kategori)}</span></td>
                 <td>${item.qty}</td>
                 <td>${formatRupiah(item.hargaSatuan)}</td>
                 <td>${formatRupiah(total)}</td>
                 <td><input type="checkbox" class="toggle-status" data-id="${item.id}" ${item.status ? 'checked' : ''}> <span style="font-size:11px;">${item.status ? 'Sudah Dibeli' : 'Belum'}</span></td>
-                <td><i class="fas fa-edit edit-item" data-id="${item.id}" style="color:#c28a5e; margin-right:8px; cursor:pointer;"></i> <i class="fas fa-trash-alt delete-item" data-id="${item.id}" style="color:#cd8d6e; cursor:pointer;"></i></td>
-            </tr>`;
+                <td><div class="action-icons"><i class="fas fa-edit edit-item" data-id="${item.id}"></i> <i class="fas fa-trash-alt delete-item" data-id="${item.id}"></i></div></td>
+            </table>`;
             tbody.insertAdjacentHTML('beforeend', row);
         });
         
@@ -361,6 +761,7 @@
         document.getElementById("purchasedCost").innerHTML = formatRupiah(purchased);
         document.getElementById("unpurchasedCost").innerHTML = formatRupiah(total - purchased);
         document.getElementById("totalItems").innerText = totalItems;
+        document.getElementById("purchasedItems").innerText = purchasedItems;
     }
     
     function toggleStatus(id) {
@@ -385,7 +786,7 @@
             document.getElementById("qty").value = i.qty;
             document.getElementById("hargaSatuan").value = i.hargaSatuan;
             document.getElementById("statusCheckbox").checked = i.status;
-            document.getElementById("modalTitle").innerText = "✏️ Edit Seserahan";
+            document.getElementById("modalTitle").innerHTML = "<i class='fas fa-edit'></i> Edit Seserahan";
             document.getElementById("itemModal").style.display = "flex";
         }
     }
@@ -394,7 +795,7 @@
         editId = null;
         document.getElementById("itemForm").reset();
         document.getElementById("statusCheckbox").checked = false;
-        document.getElementById("modalTitle").innerText = "➕ Tambah Seserahan";
+        document.getElementById("modalTitle").innerHTML = "<i class='fas fa-gift'></i> Tambah Seserahan";
         document.getElementById("itemModal").style.display = "flex";
     };
     
@@ -520,7 +921,7 @@
         t.className = "toast";
         t.innerText = m;
         document.body.appendChild(t);
-        setTimeout(() => t.remove(), 2000);
+        setTimeout(() => t.remove(), 2500);
     }
     
     loadData();
